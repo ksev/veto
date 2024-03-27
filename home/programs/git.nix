@@ -1,8 +1,9 @@
-{ config, ... }:
+{ ... }:
+
 let 
 	name = "Kim Sevandersson";
 	email = "kim@kotee.co";
-in rec {
+in {
 	programs.git = {
 		enable = true;
 		userName = name;
