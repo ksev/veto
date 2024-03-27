@@ -10,12 +10,13 @@ in {
 
   programs.lazygit.enable = true;
 
-  programs.jujutsu.enable = true;
-  programs.jujutsu.settings = {
+  programs.jujutsu = {
     enable = true;
-    user = {
-      name = name;
-      email = email;
+    settings = {
+      user = {
+        name = name;
+        email = email;
+      };
     };
   };
 }
