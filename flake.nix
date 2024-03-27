@@ -9,22 +9,25 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
-    let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
-      homeConfigurations."kim" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+  outputs = {
+    nixpkgs,
+    home-manager,
+    ...
+  }: let
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
+  in {
+    homeConfigurations."kim" = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
 
-        modules = [ 
-          ./home 
-          {
-            # Ostree dists mount home under /var
-            home.homeDirectory = "/var/home/kim";
-            targets.genericLinux.enable = true;
-          }
-        ];
-      };
+      modules = [
+        ./home
+        {
+          # Ostree dists mount home under /var
+          home.homeDirectory = "/var/home/kim";
+          targets.genericLinux.enable = true;
+        }
+      ];
     };
+  };
 }

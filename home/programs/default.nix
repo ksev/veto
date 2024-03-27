@@ -1,6 +1,6 @@
 {
-	imports = [
-		./git.nix
-		./helix.nix
-	];
+  imports = [
+    ./git.nix
+    ./helix.nix
+  ];
 }

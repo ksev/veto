@@ -5,5 +5,5 @@
   ];
 
   # Env
-  home.sessionVariables = { };
+  home.sessionVariables = {};
 }
