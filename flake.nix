@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration of kim";
+  description = "Declare the world, veto hysteresis";
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
@@ -20,10 +20,14 @@
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
-        modules = [ ./home.nix ];
-
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
+        modules = [ 
+          ./home 
+          {
+            # Ostree dists mount home under /var
+            home.homeDirectory = "/var/home/kim";
+            targets.genericLinux.enable = true;
+          }
+        ];
       };
     };
 }
