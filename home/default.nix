@@ -21,10 +21,20 @@ in {
     enable = true;
     extraConfig = ''
       Host *
-        IdentitiesOnly=yes
         IdentityAgent ${onePassPath}
     '';
   };
+
+  xdg.configFile."1Password/ssh/agent.toml".text = ''
+    [[ssh-keys]]
+    vault = "Personal"
+    [[ssh-keys]]
+    vault = "Pixlr"
+    [[ssh-keys]]
+    vault = "Homeserver"
+    [[ssh-keys]]
+    vault = "Biluppgifter"
+  '';
 
   imports = [
     ./shell
