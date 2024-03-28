@@ -1,0 +1,7 @@
+keys:
+  - &primary age1vzn8zan0hrspppp98482mkz2jscvwn2gfpzshlpstun4jeefmaesj9wc2k
+creation_rules:
+  - path_regex: home/keys/private/(.*)$
+    key_groups:
+    - age:
+      - *primary
