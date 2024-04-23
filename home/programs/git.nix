@@ -6,6 +6,10 @@ in {
     enable = true;
     userName = name;
     userEmail = email;
+    extraConfig = {
+      pull.rebase = true;
+      init.defaultBranch = "main";
+    };
   };
 
   programs.lazygit.enable = true;

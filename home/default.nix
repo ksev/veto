@@ -15,6 +15,8 @@ in {
   home.packages = with pkgs; [
     _1password
     _1password-gui
+
+    vulkan-tools
   ];
 
   programs.ssh = {

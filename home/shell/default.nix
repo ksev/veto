@@ -1,6 +1,7 @@
 {
   imports = [
     ./nushell
+    ./starship.nix
     ./bash.nix
   ];
 
