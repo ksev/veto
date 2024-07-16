@@ -27,24 +27,13 @@
       modules = [
         ./home
         {
+          vscode.enable = true;
+        
           # Ostree dists mount home under /var
           home.homeDirectory = "/var/home/kim";
           targets.genericLinux.enable = true;
         }
       ];
     };
-
-    devShell."${system}" = with pkgs;
-      mkShell {
-        buildInputs = [
-          sops
-          git
-        ];
-
-        shellHook = ''
-          ROOT_PATH=$(git rev-parse --show-toplevel)
-          export SOPS_AGE_KEY_FILE="$ROOT_PATH/sops-keys.txt"
-        '';
-      };
   };
 }
