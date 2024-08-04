@@ -22,7 +22,7 @@
 
   home.packages = with pkgs; [
     # Add nix language server for helix globally
-    nil
+    nixd
     alejandra
   ];
 }

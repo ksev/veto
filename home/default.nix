@@ -17,6 +17,7 @@ in {
     _1password-gui
 
     vulkan-tools
+    nh
   ];
 
   programs.ssh = {
