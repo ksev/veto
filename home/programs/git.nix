@@ -8,6 +8,7 @@ in {
     userEmail = email;
     ignores = [
       ".envrc"
+      ".direnv"
       ".jj"
     ];
     extraConfig = {
