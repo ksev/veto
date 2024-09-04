@@ -6,6 +6,10 @@ in {
     enable = true;
     userName = name;
     userEmail = email;
+    ignores = [
+      ".envrc"
+      ".jj"
+    ];
     extraConfig = {
       pull.rebase = true;
       init.defaultBranch = "main";

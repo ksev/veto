@@ -37,6 +37,8 @@ in {
     vault = "Homeserver"
     [[ssh-keys]]
     vault = "Biluppgifter"
+    [[ssh-keys]]
+    vault = "Cluster"
   '';
 
   imports = [
