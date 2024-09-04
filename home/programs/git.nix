@@ -17,18 +17,24 @@ in {
     };
   };
 
-  programs.lazygit.enable = true;
-
   home.packages = with pkgs; [
-    lazyjj
+    # For jj
+    watchman
   ];
 
   programs.jujutsu = {
     enable = true;
     settings = {
+      core = {
+        fsmonitor = "watchman";
+        watchman.register_snapshot_trigger = true;
+      };
       user = {
         name = name;
         email = email;
+      };
+      ui = {
+        diff.tool = ["${pkgs.difftastic}/bin/difft" "--color=always" "$left" "$right"];
       };
     };
   };
