@@ -1,4 +1,4 @@
-{...}: let
+{pkgs, ...}: let
   name = "Kim Sevandersson";
   email = "kim@kotee.co";
 in {
@@ -17,6 +17,10 @@ in {
   };
 
   programs.lazygit.enable = true;
+
+  home.packages = with pkgs; [
+    lazyjj
+  ];
 
   programs.jujutsu = {
     enable = true;
