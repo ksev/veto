@@ -16,7 +16,7 @@ in {
     _1password
     _1password-gui
 
-    vulkan-tools
+    jetbrains.rider
     nh
   ];
 
