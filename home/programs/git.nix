@@ -34,6 +34,7 @@ in {
         email = email;
       };
       ui = {
+        default-command = "log";
         diff.tool = ["${pkgs.difftastic}/bin/difft" "--color=always" "$left" "$right"];
       };
     };
