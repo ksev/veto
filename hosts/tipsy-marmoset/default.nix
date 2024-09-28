@@ -63,17 +63,32 @@
 
   # programs.regreet.enable = true;
 
-  nix.gc = {
-    automatic = true;
+  nix = {
+    gc.automatic = true;
+    settings = {
+      experimental-features = ["nix-command" "flakes"];
+      substituters = [
+        "https://nix-community.cachix.org"
+        "https://cache.nixos.org/"
+      ];
+      trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
+    };
   };
 
   networking.hostName = "tipsy-marmoset"; # Define your hostname.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
-
   powerManagement.enable = true;
 
+  services.tlp = {
+    enable = true;
+    settings = {
+      START_CHARGE_THRESH_BAT0 = 40; # 40 and bellow it starts to charge
+      STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging    };
+    };
+  };
   services.upower.enable = true;
   programs.firefox.enable = true;
 
@@ -122,7 +137,11 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [];
+  environment.systemPackages = with pkgs; [
+    s0ix-selftest-tool
+    acpica-tools
+    powertop
+  ];
 
   programs.niri.enable = true;
 

@@ -1,0 +1,33 @@
+window#waybar {
+  border-right: 1px solid rgba(0,0,0,0.2);
+}
+
+#workspaces {
+  margin: 5px;
+}
+
+#workspaces button {
+  color: rgba(255,255,255,0.4);
+}
+
+#workspaces button.active {
+  color: #fff;
+}
+
+#battery {
+  font-size: 26px;
+}
+
+#network {
+  font-size: 26px;
+  margin-bottom: -6px;
+}
+
+#clock.hour {
+  font-weight: bold;
+}
+
+#clock.minute {
+  margin-bottom: 15px;
+  color: rgba(255,255,255,0.75);
+}

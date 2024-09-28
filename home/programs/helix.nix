@@ -3,6 +3,14 @@
     enable = true;
     defaultEditor = true;
 
+    settings = {
+      editor.cursor-shape = {
+        insert = "bar";
+        normal = "block";
+        select = "block";
+      };
+    };
+
     languages = {
       language-server.nixd = {
         command = "nixd";
