@@ -1,20 +1,49 @@
-{ config, lib, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   stylix.enable = true;
   stylix.polarity = "dark";
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
   stylix.image = ./wallpaper.jpg;
 
+  stylix.cursor.package = pkgs.bibata-cursors;
+  stylix.cursor.name = "Bibata-Modern-Ice";
+  stylix.cursor.size = 24;
+
+  fonts.packages = with pkgs; [
+    dejavu_fonts
+    roboto
+    font-awesome
+    (nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
+  ];
+
+  stylix.fonts = {
+    monospace = {
+      package = pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];};
+      name = "JetBrainsMono Nerd Font Mono";
+    };
+    sansSerif = {
+      package = pkgs.dejavu_fonts;
+      name = "DejaVu Sans";
+    };
+    serif = {
+      package = pkgs.dejavu_fonts;
+      name = "DejaVu Serif";
+    };
+  };
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.supportedFilesystems = [ "bcachefs" ];
+  boot.supportedFilesystems = ["bcachefs"];
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # boot.plymouth.enable = true;
@@ -22,13 +51,13 @@
   # boot.initrd.verbose = false;
   # boot.initrd.systemd.enable = true;
   # boot.kernelParams = [
-    # "quiet"
-    # "splash"
-    # "boot.shell_on_fail"
-    #"loglevel=3"
-    #"rd.systemd.show_status=false"
-    #"rd.udev.log_level=3"
-    #"udev.log_priority=3"
+  # "quiet"
+  # "splash"
+  # "boot.shell_on_fail"
+  #"loglevel=3"
+  #"rd.systemd.show_status=false"
+  #"rd.udev.log_level=3"
+  #"udev.log_priority=3"
   # ];
   boot.loader.timeout = 0;
 
@@ -39,9 +68,9 @@
   };
 
   networking.hostName = "tipsy-marmoset"; # Define your hostname.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   powerManagement.enable = true;
 
@@ -51,7 +80,7 @@
   programs._1password.enable = true;
   programs._1password-gui = {
     enable = true;
-    polkitPolicyOwners = [ "kim" ];
+    polkitPolicyOwners = ["kim"];
   };
 
   # Set your time zone.
@@ -60,8 +89,8 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
-     font = "Lat2-Terminus16";
-     useXkbConfig = true; # use xkb.options in tty.
+    font = "Lat2-Terminus16";
+    useXkbConfig = true; # use xkb.options in tty.
   };
 
   # Enable the X11 windowing system.
@@ -88,7 +117,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.kim = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
   };
 
   # List packages installed in system profile. To search, run:

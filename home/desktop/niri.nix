@@ -14,6 +14,7 @@
     };
     window-rules = [
       {
+        clip-to-geometry = true;
         geometry-corner-radius = let
           r = 6.0;
         in {

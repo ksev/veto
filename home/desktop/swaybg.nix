@@ -10,7 +10,7 @@
       Requisite = "graphical-session.target";
     };
     Service = {
-      ExecStart = "${pkgs.swaybg}/bin/swaybg -m fit -i ${config.stylix.image}";
+      ExecStart = "${pkgs.swaybg}/bin/swaybg -m fill -i ${config.stylix.image}";
       Restart="on-failure";
     };
   };

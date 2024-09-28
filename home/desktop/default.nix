@@ -10,6 +10,7 @@
     ncpamixer
     brightnessctl
     wl-clipboard
+    wl-clipboard-x11
     wayland-utils
     cage
   ];
