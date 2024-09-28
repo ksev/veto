@@ -12,10 +12,22 @@ in {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  home.packages = with pkgs; [
-    _1password
-    _1password-gui
+  programs.fuzzel.enable = true;
+  
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      window.decorations = "None";
+    };
+  };
 
+  services.mako = {
+    enable = true;
+  };
+
+  home.keyboard = null;
+
+  home.packages = with pkgs; [
     jetbrains.rider
     nh
   ];
@@ -44,5 +56,6 @@ in {
   imports = [
     ./shell
     ./programs
+    ./desktop
   ];
 }
