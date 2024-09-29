@@ -5,12 +5,17 @@
     ];
     input = {
       keyboard.xkb.layout = "se";
+
       touchpad = {
         tap = true;
         natural-scroll = false;
       };
 
       warp-mouse-to-focus = false;
+    };
+    outputs."eDP-1" = {
+      scale = 1.25;
+      variable-refresh-rate = true;
     };
     window-rules = [
       {
@@ -33,7 +38,7 @@
         { proportion = 1. / 2.; }
         { proportion = 2. / 3.; }
       ];
-      default-column-width = { proportion = 0.5; };
+      default-column-width.proportion = 0.5;
       focus-ring = {
         width = 4;
       };

@@ -43,9 +43,9 @@ in {
 
       spacing = 0;
 
-      modules-left = ["niri/workspaces"];
+      modules-left = ["clock#hour" "clock#minute" "niri/workspaces"];
       modules-center = [];
-      modules-right = ["tray" "network" "battery" "clock#hour" "clock#minute"];
+      modules-right = ["tray" "network" "battery"];
 
       battery = {
         format = "{icon}";
@@ -57,15 +57,12 @@ in {
 
       network = {
         interface = "wlo1";
-        format = "{ifname}";
-        format-wifi = "";
-        format-ethernet = "{ipaddr}/{cidr} 󰊗";
-        format-disconnected = "";
-        tooltip-format = "{ifname} via {gwaddr} 󰊗";
+        format = "󰤫";
+        format-wifi = "{icon}";
+        format-icons = ["󰤯" "󰤟" "󰤢" "󰤥" "󰤨"];
+        format-disconnected = "󰤫";
         tooltip-format-wifi = "{essid} ({signalStrength}%)";
-        tooltip-format-ethernet = "{ifname} ";
         tooltip-format-disconnected = "Disconnected";
-        max-length = 50;
       };
 
       "niri/workspaces" = {

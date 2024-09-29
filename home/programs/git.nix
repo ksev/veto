@@ -36,6 +36,7 @@ in {
       ui = {
         default-command = "log";
         diff.tool = ["${pkgs.difftastic}/bin/difft" "--color=always" "$left" "$right"];
+        pager = "less -FRX";
       };
     };
   };

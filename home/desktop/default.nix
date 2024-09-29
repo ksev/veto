@@ -13,5 +13,7 @@
     wl-clipboard-x11
     wayland-utils
     cage
+
+    dbeaver-bin
   ];
 }
