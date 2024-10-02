@@ -15,5 +15,8 @@
       ExecStart = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";
       Restart="on-failure";
     };
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
   };
 }

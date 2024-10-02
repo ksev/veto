@@ -13,6 +13,7 @@
     wl-clipboard-x11
     wayland-utils
     cage
+    helvum
 
     dbeaver-bin
   ];

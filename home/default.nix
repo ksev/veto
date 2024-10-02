@@ -13,7 +13,11 @@ in {
   programs.home-manager.enable = true;
 
   programs.fuzzel.enable = true;
-  
+  gtk.iconTheme = {
+    package = pkgs.adwaita-icon-theme;
+    name = "Adwaita";
+  };
+
   programs.alacritty = {
     enable = true;
     settings = {
@@ -25,7 +29,7 @@ in {
     enable = true;
   };
 
-  home.keyboard = null;
+  programs.btop.enable = true;
 
   home.packages = with pkgs; [
     jetbrains.rider

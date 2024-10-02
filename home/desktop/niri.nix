@@ -1,8 +1,5 @@
 {
   programs.niri.settings = {
-    spawn-at-startup = [
-      {command = ["systemctl" "--user" "reset-failed" "waybar.service"];}
-    ];
     input = {
       keyboard.xkb.layout = "se";
 
@@ -77,6 +74,9 @@
       
       "XF86MonBrightnessUp".action.spawn = ["brightnessctl" "set" "+10"];
       "XF86MonBrightnessDown".action.spawn = ["brightnessctl" "set" "10-"];
+      "XF86AudioMute".action.spawn = ["wpctl" "set-mute" "@DEFAULT_SINK@" "toggle"]; 
+      "XF86AudioLowerVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_SINK@" "0.05-" "-l" "1.0"]; 
+      "XF86AudioRaiseVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_SINK@" "0.05+" "-l" "1.0"]; 
     };
   };
 }

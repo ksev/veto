@@ -30,9 +30,23 @@
 in {
   stylix.targets.waybar.enable = false;
 
+  systemd.user.services.waybar = {
+    Unit = {
+      PartOf = "graphical-session.target";
+      After = "graphical-session.target";
+      Requisite = "graphical-session.target";
+    };
+    Service = {
+      ExecStart = "${pkgs.waybar}/bin/waybar";
+    };
+    Install = {
+      WantedBy = ["graphical-session.target"];
+    };
+  };
+
   programs.waybar = {
     enable = true;
-    systemd.enable = true;
+    systemd.enable = false;
     settings.mainBar = {
       layer = "top";
       position = "left";
@@ -45,7 +59,7 @@ in {
 
       modules-left = ["clock#hour" "clock#minute" "niri/workspaces"];
       modules-center = [];
-      modules-right = ["tray" "network" "battery"];
+      modules-right = ["tray" "wireplumber" "network" "battery"];
 
       battery = {
         format = "{icon}";

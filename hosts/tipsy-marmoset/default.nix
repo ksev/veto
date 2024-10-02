@@ -44,7 +44,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = ["bcachefs"];
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_testing;
 
   # boot.plymouth.enable = true;
   # boot.consoleLogLevel = 0;
@@ -82,6 +82,7 @@
 
   powerManagement.enable = true;
 
+  /*
   services.tlp = {
     enable = true;
     settings = {
@@ -89,6 +90,24 @@
       STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging    };
     };
   };
+  */
+
+  services.auto-cpufreq = {
+    enable = true;
+    settings = {
+      battery = {
+        governor = "powersave";
+        turbo = "never";
+        enable_threshold = 20;
+        stop_threshold = 80;
+      };
+      charger = {
+        governor = "performance";
+        turbo = "auto";
+      };
+    };
+  };
+
   services.upower.enable = true;
   programs.firefox.enable = true;
 
@@ -126,6 +145,12 @@
     alsa.support32Bit = true;
   };
 
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+  services.blueman.enable = true;
+
+  services.fwupd.enable = true;
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
@@ -139,6 +164,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     s0ix-selftest-tool
+    pciutils
     acpica-tools
     powertop
   ];
