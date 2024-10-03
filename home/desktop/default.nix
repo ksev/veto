@@ -14,6 +14,7 @@
     wayland-utils
     cage
     helvum
+    eww-wayland
 
     dbeaver-bin
   ];

@@ -14,8 +14,8 @@
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
   stylix.image = ./wallpaper.jpg;
 
-  stylix.cursor.package = pkgs.bibata-cursors;
-  stylix.cursor.name = "Bibata-Modern-Ice";
+  stylix.cursor.package = pkgs.simp1e-cursors;
+  stylix.cursor.name = "Simp1e-Dark";
   stylix.cursor.size = 24;
 
   fonts.packages = with pkgs; [
@@ -82,16 +82,16 @@
 
   powerManagement.enable = true;
 
-  /*
   services.tlp = {
     enable = true;
     settings = {
-      START_CHARGE_THRESH_BAT0 = 40; # 40 and bellow it starts to charge
-      STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging    };
+      RESTORE_THRESHOLDS_ON_BAT = 1;      
+      START_CHARGE_THRESH_BAT0 = 75; # 40 and bellow it starts to charge
+      STOP_CHARGE_THRESH_BAT0 = 81; # 80 and above it stops charging    };
     };
   };
-  */
 
+  /*
   services.auto-cpufreq = {
     enable = true;
     settings = {
@@ -107,6 +107,7 @@
       };
     };
   };
+  */
 
   services.upower.enable = true;
   programs.firefox.enable = true;

@@ -11,7 +11,7 @@
       warp-mouse-to-focus = false;
     };
     outputs."eDP-1" = {
-      scale = 1.25;
+      scale = 1.33;
       variable-refresh-rate = true;
     };
     window-rules = [
