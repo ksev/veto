@@ -64,7 +64,11 @@
   # programs.regreet.enable = true;
 
   nix = {
-    gc.automatic = true;
+    gc = {
+      automatic = true;
+      dates = "daily";
+      options = "--delete-older-than +5";
+    };
     settings = {
       experimental-features = ["nix-command" "flakes"];
       substituters = [
@@ -81,33 +85,14 @@
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   powerManagement.enable = true;
-
   services.tlp = {
     enable = true;
     settings = {
-      RESTORE_THRESHOLDS_ON_BAT = 1;      
+      RESTORE_THRESHOLDS_ON_BAT = 1;
       START_CHARGE_THRESH_BAT0 = 75; # 40 and bellow it starts to charge
       STOP_CHARGE_THRESH_BAT0 = 81; # 80 and above it stops charging    };
     };
   };
-
-  /*
-  services.auto-cpufreq = {
-    enable = true;
-    settings = {
-      battery = {
-        governor = "powersave";
-        turbo = "never";
-        enable_threshold = 20;
-        stop_threshold = 80;
-      };
-      charger = {
-        governor = "performance";
-        turbo = "auto";
-      };
-    };
-  };
-  */
 
   services.upower.enable = true;
   programs.firefox.enable = true;
@@ -127,9 +112,6 @@
     font = "Lat2-Terminus16";
     useXkbConfig = true; # use xkb.options in tty.
   };
-
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "se";
@@ -168,6 +150,7 @@
     pciutils
     acpica-tools
     powertop
+    gnome.nautilus
   ];
 
   programs.niri.enable = true;

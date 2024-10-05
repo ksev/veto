@@ -13,16 +13,10 @@ in {
   programs.home-manager.enable = true;
 
   programs.fuzzel.enable = true;
+
   gtk.iconTheme = {
     package = pkgs.adwaita-icon-theme;
     name = "Adwaita";
-  };
-
-  programs.alacritty = {
-    enable = true;
-    settings = {
-      window.decorations = "None";
-    };
   };
 
   services.mako = {

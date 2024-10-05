@@ -14,7 +14,8 @@
     wayland-utils
     cage
     helvum
-    eww-wayland
+    cabextract
+    eww
 
     dbeaver-bin
   ];
