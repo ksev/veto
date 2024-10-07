@@ -7,6 +7,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./firmware/bt.nix
   ];
 
   stylix.enable = true;

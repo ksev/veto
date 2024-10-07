@@ -12,6 +12,7 @@
     wl-clipboard
     wl-clipboard-x11
     wayland-utils
+    nautilus
     cage
     helvum
     cabextract
