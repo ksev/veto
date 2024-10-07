@@ -11,6 +11,8 @@
   ];
 
   stylix.enable = true;
+  stylix.autoEnable = false;
+
   stylix.polarity = "dark";
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
   stylix.image = ./wallpaper.jpg;
@@ -63,6 +65,14 @@
   boot.loader.timeout = 0;
 
   # programs.regreet.enable = true;
+  services.xserver = {
+    enable = true;
+    desktopManager.gnome.enable = true;
+    displayManager.gdm = {
+      enable = true;
+      wayland = true;
+    };
+  };
 
   nix = {
     gc.automatic = true;
@@ -83,14 +93,16 @@
 
   powerManagement.enable = true;
 
+  /*
   services.tlp = {
     enable = true;
     settings = {
-      RESTORE_THRESHOLDS_ON_BAT = 1;      
+      RESTORE_THRESHOLDS_ON_BAT = 1;
       START_CHARGE_THRESH_BAT0 = 75; # 40 and bellow it starts to charge
       STOP_CHARGE_THRESH_BAT0 = 81; # 80 and above it stops charging    };
     };
   };
+  */
 
   /*
   services.auto-cpufreq = {
@@ -169,6 +181,7 @@
     pciutils
     acpica-tools
     powertop
+    linuxPackages_testing.cpupower
   ];
 
   programs.niri.enable = true;

@@ -28,8 +28,6 @@
   colors = config.lib.stylix.colors.withHashtag;
   defineColor = name: value: "@define-color ${name} ${value};";
 in {
-  stylix.targets.waybar.enable = false;
-
   systemd.user.services.waybar = {
     Unit = {
       PartOf = "graphical-session.target";
@@ -49,7 +47,7 @@ in {
     systemd.enable = false;
     settings.mainBar = {
       layer = "top";
-      position = "left";
+      position = "top";
       output = [
         "eDP-1"
         "HDMI-A-1"
@@ -57,26 +55,19 @@ in {
 
       spacing = 0;
 
-      modules-left = ["clock#hour" "clock#minute" "niri/workspaces"];
-      modules-center = [];
-      modules-right = ["tray" "wireplumber" "network" "battery"];
+      modules-left = ["niri/workspaces" "niri/window"];
+      modules-center = ["clock"];
+      modules-right = ["battery" "tray"];
+
+      "tray" = {
+        "icon-size" = 18;
+        "spacing" = 10;
+      };
 
       battery = {
-        format = "{icon}";
+        format = "{icon} {capacity}%";
         format-icons = ["" "" "" "" ""];
-        tooltip-format = "{capacity}% {power:.1f}W ({timeTo})";
-      };
-      "clock#hour".format = "{:%H}";
-      "clock#minute".format = "{:%M}";
-
-      network = {
-        interface = "wlo1";
-        format = "󰤫";
-        format-wifi = "{icon}";
-        format-icons = ["󰤯" "󰤟" "󰤢" "󰤥" "󰤨"];
-        format-disconnected = "󰤫";
-        tooltip-format-wifi = "{essid} ({signalStrength}%)";
-        tooltip-format-disconnected = "Disconnected";
+        tooltip-format = "{timeTo} ({power:.1f}W)";
       };
 
       "niri/workspaces" = {
