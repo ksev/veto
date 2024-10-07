@@ -29,6 +29,15 @@
       inherit system;
       config.allowUnfree = true;
     };
+    sofOverlay = final: prev: {
+      sof-firmware = prev.sof-firmware.overrideAttrs (old: {
+        version = "2024.09";
+        src = pkgs.fetchurl {
+          url = "https://github.com/thesofproject/sof-bin/releases/download/v2024.09/sof-bin-2024.09.tar.gz";
+          sha256 = "sha256-6kfZn4E1kAjQdhi8oQPPePgthOlAv+lBoor+B8jLxiA=";
+        };
+      });
+    };
   in {
     nixosConfigurations.tipsy-marmoset = nixpkgs.lib.nixosSystem {
       inherit pkgs system;
@@ -39,7 +48,7 @@
         ./hosts/tipsy-marmoset
         home-manager.nixosModules.home-manager
         {
-          nixpkgs.overlays = [niri.overlays.niri];
+          nixpkgs.overlays = [niri.overlays.niri sofOverlay];
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.kim = import ./home;
