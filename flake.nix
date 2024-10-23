@@ -39,7 +39,6 @@
         ./hosts/tipsy-marmoset
         home-manager.nixosModules.home-manager
         {
-          nixpkgs.overlays = [niri.overlays.niri];
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.kim = import ./home;

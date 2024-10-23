@@ -1,10 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./gnome.nix
-    ./niri.nix
-    ./waybar.nix
-    ./swaybg.nix
-    ./xwayland-session.nix
+    ./niri
   ];
 
   stylix.targets = {
@@ -17,15 +14,22 @@
     niri.enable = true;
   };
 
+  programs.mangohud = {
+    enable = true;
+    # enableSessionWide = true;
+  };
+
   home.packages = with pkgs; [
     ncpamixer
     brightnessctl
     wl-clipboard
     wl-clipboard-x11
-    wayland-utils
     helvum
     networkmanagerapplet
 
+    postman
+    slack
+    filezilla
     dbeaver-bin
     zed-editor
   ];

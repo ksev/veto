@@ -7,13 +7,12 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./firmware/bt.nix
+    # ./firmware/bt.nix
   ];
 
   stylix.enable = true;
   stylix.autoEnable = false;
 
-  stylix.polarity = "dark";
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
   stylix.image = ./wallpaper.jpg;
 
@@ -58,6 +57,7 @@
   # "splash"
   # "boot.shell_on_fail"
   #"loglevel=3"
+
   #"rd.systemd.show_status=false"
   #"rd.udev.log_level=3"
   #"udev.log_priority=3"
@@ -131,6 +131,8 @@
     polkitPolicyOwners = ["kim"];
   };
 
+  programs.steam.enable = true;
+
   # Set your time zone.
   time.timeZone = "Europe/Stockholm";
 
@@ -145,7 +147,10 @@
   # services.xserver.enable = true;
 
   # Configure keymap in X11
-  services.xserver.xkb.layout = "se";
+  services.xserver.xkb = {
+    layout = "se";
+    variant = "nodeadkeys";
+  };
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
   # Enable sound.
@@ -161,8 +166,6 @@
 
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
-  services.blueman.enable = true;
-
   services.fwupd.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -182,6 +185,7 @@
     acpica-tools
     powertop
     linuxPackages_testing.cpupower
+    usbutils
   ];
 
   programs.niri.enable = true;

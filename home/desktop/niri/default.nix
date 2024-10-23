@@ -1,17 +1,20 @@
 {
-  config,
+  osConfig,
   lib,
+  niri,
   ...
 }: {
-  config = lib.mkIf config.programs.niri.enable {
-    imports = [
-      ./swaybg.nix
-      ./waybar.nix
-      ./xwayland-session.nix
-    ];
+  imports = [
+    ./swaybg.nix
+    ./waybar.nix
+    ./xwayland-session.nix
+  ];
 
+  config = lib.mkIf osConfig.programs.niri.enable {
     programs.fuzzel.enable = true;
     services.mako.enable = true;
+    
+    nixpkgs.overlays = [niri.overlays.niri];
 
     programs.niri.settings = {
       input = {
@@ -45,9 +48,9 @@
         gaps = 16;
         center-focused-column = "never";
         preset-column-widths = [
-          {proportion = 1./3.;}
-          {proportion = 1./2.;}
-          {proportion = 2./3.;}
+          {proportion = 1.0 / 3.0;}
+          {proportion = 1.0 / 2.0;}
+          {proportion = 2.0 / 3.0;}
         ];
         default-column-width.proportion = 0.5;
         focus-ring = {
@@ -56,7 +59,7 @@
       };
       binds = {
         "Mod+Shift+Slash".action.show-hotkey-overlay = [];
-        "Mod+T".action.spawn = "alacritty";
+        "Mod+T".action.spawn = ["alacritty" "-o" "window.decorations=\"None\""];
         "Mod+D".action.spawn = "fuzzel";
         "Mod+Q".action.close-window = [];
 

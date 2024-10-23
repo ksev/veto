@@ -1,22 +1,17 @@
 {
-  config,
+  osConfig,
   lib,
   pkgs,
   ...
 }: {
-  config = lib.mkIf config.services.xserver.desktopManager.gnome.enable {
-    home.package = with pkgs; [
-      gnome-tweaks
+  config = lib.mkIf osConfig.services.xserver.desktopManager.gnome.enable {
+    home.packages = with pkgs; [
       gnomeExtensions.blur-my-shell
       gnomeExtensions.grand-theft-focus
       gnomeExtensions.no-overview
       gnomeExtensions.vitals
+      gnomeExtensions.battery-health-charging
     ];
-
-    gtk.iconTheme = {
-      package = pkgs.adwaita-icon-theme;
-      name = "Adwaita";
-    };
 
     dconf = {
       enable = true;
@@ -29,12 +24,14 @@
             no-overview.extensionUuid
             launch-new-instance.extensionUuid
             vitals.extensionUuid
+            battery-health-charging.extensionUuid
           ];
         };
         "org/gnome/mutter" = {
           experimental-features = [
             "scale-monitor-framebuffer"
             "variable-refresh-rate"
+            # "xwayland-native-scaling"
           ];
         };
       };

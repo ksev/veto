@@ -1,10 +1,10 @@
 {
   pkgs,
   config,
+  osConfig,
+  lib,
   ...
 }: let
-  lib = pkgs.lib;
-
   colorNames = [
     "base00"
     "base01"
@@ -28,72 +28,74 @@
   colors = config.lib.stylix.colors.withHashtag;
   defineColor = name: value: "@define-color ${name} ${value};";
 in {
-  systemd.user.services.waybar = {
-    Unit = {
-      PartOf = "graphical-session.target";
-      After = "graphical-session.target";
-      Requisite = "graphical-session.target";
-    };
-    Service = {
-      ExecStart = "${pkgs.waybar}/bin/waybar";
-    };
-    Install = {
-      WantedBy = ["graphical-session.target"];
-    };
-  };
-
-  programs.waybar = {
-    enable = true;
-    systemd.enable = false;
-    settings.mainBar = {
-      layer = "top";
-      position = "top";
-      output = [
-        "eDP-1"
-        "HDMI-A-1"
-      ];
-
-      spacing = 0;
-
-      modules-left = ["niri/workspaces" "niri/window"];
-      modules-center = ["clock"];
-      modules-right = ["battery" "tray"];
-
-      "tray" = {
-        "icon-size" = 18;
-        "spacing" = 10;
+  config = lib.mkIf osConfig.programs.niri.enable {
+    systemd.user.services.waybar = {
+      Unit = {
+        PartOf = "graphical-session.target";
+        After = "graphical-session.target";
+        Requisite = "graphical-session.target";
       };
-
-      battery = {
-        format = "{icon} {capacity}%";
-        format-icons = ["" "" "" "" ""];
-        tooltip-format = "{timeTo} ({power:.1f}W)";
+      Service = {
+        ExecStart = "${pkgs.waybar}/bin/waybar";
       };
+      Install = {
+        WantedBy = ["graphical-session.target"];
+      };
+    };
 
-      "niri/workspaces" = {
-        format = "{icon}";
-        format-icons = {
-          active = "";
-          default = "";
+    programs.waybar = {
+      enable = true;
+      systemd.enable = false;
+      settings.mainBar = {
+        layer = "top";
+        position = "top";
+        output = [
+          "eDP-1"
+          "HDMI-A-1"
+        ];
+
+        spacing = 0;
+
+        modules-left = ["niri/workspaces" "niri/window"];
+        modules-center = ["clock"];
+        modules-right = ["battery" "tray"];
+
+        "tray" = {
+          "icon-size" = 18;
+          "spacing" = 10;
+        };
+
+        battery = {
+          format = "{icon} {capacity}%";
+          format-icons = ["" "" "" "" ""];
+          tooltip-format = "{timeTo} ({power:.1f}W)";
+        };
+
+        "niri/workspaces" = {
+          format = "{icon}";
+          format-icons = {
+            active = "";
+            default = "";
+          };
         };
       };
+      style =
+        lib.strings.concatStringsSep "\n"
+        (
+          # Convert the colors attribute set to GTK color declarations
+          builtins.map (color: defineColor color colors.${color}) colorNames
+        )
+        +
+        # Append the main CSS file
+        (builtins.readFile ./waybar.css)
+        +
+        # Use monospace font
+        ''
+          /* Font family injected by Nix */
+          * {
+            font-family: ${config.stylix.fonts.monospace.name};
+          }
+        '';
     };
-    style =
-      lib.strings.concatStringsSep "\n"
-      (
-        # Convert the colors attribute set to GTK color declarations
-        builtins.map (color: defineColor color colors.${color}) colorNames
-      )
-      +
-      # Append the main CSS file
-      (builtins.readFile ./waybar.css)
-      +
-      # Use monospace font
-      ''
-        /* Font family injected by Nix */
-        * {
-          font-family: ${config.stylix.fonts.monospace.name};
-        }
-      '';
   };
 }
