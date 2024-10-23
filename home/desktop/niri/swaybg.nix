@@ -11,10 +11,10 @@
     };
     Service = {
       ExecStart = "${pkgs.swaybg}/bin/swaybg -m fill -i ${config.stylix.image}";
-      Restart="on-failure";
+      Restart = "on-failure";
     };
     Install = {
-      WantedBy = [ "graphical-session.target" ];
+      WantedBy = ["graphical-session.target"];
     };
   };
 }

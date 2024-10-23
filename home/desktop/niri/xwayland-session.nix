@@ -1,8 +1,4 @@
-
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   programs.niri.settings.environment."DISPLAY" = ":0";
 
   systemd.user.services.xwayland-satellite = {
@@ -13,10 +9,10 @@
     };
     Service = {
       ExecStart = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";
-      Restart="on-failure";
+      Restart = "on-failure";
     };
     Install = {
-      WantedBy = [ "graphical-session.target" ];
+      WantedBy = ["graphical-session.target"];
     };
   };
 }

@@ -5,29 +5,18 @@
 }: let
   onePassPath = "~/.1password/agent.sock";
 in {
+  imports = [
+    ./shell
+    ./programs
+    ./desktop
+  ];
+
   home.username = "kim";
   home.stateVersion = "23.11"; # Please read the comment before changing.
   home.homeDirectory = lib.mkDefault "/home/kim";
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
-  programs.fuzzel.enable = true;
-  gtk.iconTheme = {
-    package = pkgs.adwaita-icon-theme;
-    name = "Adwaita";
-  };
-
-  programs.alacritty = {
-    enable = true;
-    settings = {
-      window.decorations = "None";
-    };
-  };
-
-  services.mako = {
-    enable = true;
-  };
 
   programs.btop.enable = true;
 
@@ -56,10 +45,4 @@ in {
     [[ssh-keys]]
     vault = "Cluster"
   '';
-
-  imports = [
-    ./shell
-    ./programs
-    ./desktop
-  ];
 }
