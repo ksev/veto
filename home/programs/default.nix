@@ -4,5 +4,6 @@
     ./vscode.nix
     ./helix.nix
     ./alacritty.nix
+    ./rider.nix
   ];
 }

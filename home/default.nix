@@ -21,7 +21,6 @@ in {
   programs.btop.enable = true;
 
   home.packages = with pkgs; [
-    jetbrains.rider
     nh
   ];
 

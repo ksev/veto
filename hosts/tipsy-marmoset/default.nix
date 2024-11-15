@@ -1,13 +1,11 @@
 {
   config,
-  lib,
   pkgs,
   ...
 }: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    # ./firmware/bt.nix
   ];
 
   stylix.enable = true;
@@ -46,7 +44,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = ["bcachefs"];
-  boot.kernelPackages = pkgs.linuxPackages_testing;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # boot.plymouth.enable = true;
   # boot.consoleLogLevel = 0;
@@ -184,7 +182,7 @@
     pciutils
     acpica-tools
     powertop
-    linuxPackages_testing.cpupower
+    config.boot.kernelPackages.cpupower
     usbutils
   ];
 
