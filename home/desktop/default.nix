@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./gnome.nix
-    ./niri
+    #./niri
   ];
 
   stylix.targets = {
