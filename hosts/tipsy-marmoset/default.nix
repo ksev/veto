@@ -22,6 +22,7 @@
     dejavu_fonts
     roboto
     font-awesome
+    nerd-fonts.jetbrains-mono
     nerd-fonts.symbols-only
   ];
 
@@ -185,8 +186,6 @@
     config.boot.kernelPackages.cpupower
     usbutils
   ];
-
-  programs.niri.enable = true;
 
   system.stateVersion = "24.05"; # Did you read the comment?
 }
