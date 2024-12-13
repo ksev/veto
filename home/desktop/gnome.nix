@@ -11,6 +11,8 @@
       gnomeExtensions.no-overview
       gnomeExtensions.vitals
       gnomeExtensions.battery-health-charging
+
+      gnome-tweaks
     ];
 
     dconf = {

@@ -27,6 +27,7 @@
     helvum
     networkmanagerapplet
 
+    google-chrome
     postman
     slack
     filezilla
