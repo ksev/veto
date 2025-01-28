@@ -87,8 +87,10 @@
     };
   };
 
+  networking.firewall.enable = false;
   networking.hostName = "tipsy-marmoset"; # Define your hostname.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+  networking.wireguard.enable = true;
 
   powerManagement.enable = true;
 
@@ -165,6 +167,8 @@
 
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
+  hardware.xone.enable = true;
+
   services.fwupd.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -183,8 +187,9 @@
     pciutils
     acpica-tools
     powertop
-    config.boot.kernelPackages.cpupower
     usbutils
+
+    config.boot.kernelPackages.cpupower
   ];
 
   system.stateVersion = "24.05"; # Did you read the comment?

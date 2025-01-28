@@ -33,6 +33,9 @@ in {
         name = name;
         email = email;
       };
+      git = {
+        subprocess = true;
+      };
       ui = {
         default-command = "log";
         diff.tool = ["${pkgs.difftastic}/bin/difft" "--color=always" "$left" "$right"];

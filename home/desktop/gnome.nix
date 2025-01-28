@@ -11,6 +11,7 @@
       gnomeExtensions.no-overview
       gnomeExtensions.vitals
       gnomeExtensions.battery-health-charging
+      gnomeExtensions.tiling-shell
 
       gnome-tweaks
     ];
@@ -24,9 +25,9 @@
             blur-my-shell.extensionUuid
             grand-theft-focus.extensionUuid
             no-overview.extensionUuid
-            launch-new-instance.extensionUuid
             vitals.extensionUuid
             battery-health-charging.extensionUuid
+            tiling-shell.extensionUuid
           ];
         };
         "org/gnome/mutter" = {
