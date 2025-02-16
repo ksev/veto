@@ -45,6 +45,21 @@
         }
       ];
     };
+    nixosConfigurations.soused-baboon = nixpkgs.lib.nixosSystem {
+      inherit pkgs system;
+
+      modules = [
+        niri.nixosModules.niri
+        stylix.nixosModules.stylix
+        ./hosts/soused-baboon
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.kim = import ./home;
+        }
+      ];
+    };
     homeConfigurations."kim" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
 
