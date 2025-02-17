@@ -74,6 +74,8 @@
     };
   };
 
+  networking.wireguard.enable = true;
+  networking.firewall.enable = false;
   networking.hostName = "soused-baboon"; # Define your hostname.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
@@ -84,6 +86,11 @@
   programs._1password-gui = {
     enable = true;
     polkitPolicyOwners = ["kim"];
+  };
+
+  programs.localsend = {
+    enable = true;
+    openFirewall = true;
   };
 
   programs.steam.enable = true;

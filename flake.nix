@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,6 +23,7 @@
     home-manager,
     stylix,
     niri,
+    chaotic,
     ...
   }: let
     system = "x86_64-linux";
@@ -29,50 +31,26 @@
       inherit system;
       config.allowUnfree = true;
     };
+    desktopSystem = path: nixpkgs.lib.nixosSystem {
+      inherit pkgs system;
+
+      modules = [
+        niri.nixosModules.niri
+        stylix.nixosModules.stylix
+        chaotic.nixosModules.default
+
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.kim = import ./home;
+        }
+
+        path
+      ];
+    };
   in {
-    nixosConfigurations.tipsy-marmoset = nixpkgs.lib.nixosSystem {
-      inherit pkgs system;
-
-      modules = [
-        niri.nixosModules.niri
-        stylix.nixosModules.stylix
-        ./hosts/tipsy-marmoset
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.kim = import ./home;
-        }
-      ];
-    };
-    nixosConfigurations.soused-baboon = nixpkgs.lib.nixosSystem {
-      inherit pkgs system;
-
-      modules = [
-        niri.nixosModules.niri
-        stylix.nixosModules.stylix
-        ./hosts/soused-baboon
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.kim = import ./home;
-        }
-      ];
-    };
-    homeConfigurations."kim" = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-
-      modules = [
-        ./home
-        {
-          vscode.enable = true;
-
-          # Ostree dists mount home under /var
-          home.homeDirectory = "/var/home/kim";
-          targets.genericLinux.enable = true;
-        }
-      ];
-    };
+    nixosConfigurations.tipsy-marmoset = desktopSystem ./hosts/tipsy-marmoset;
+    nixosConfigurations.soused-baboon = desktopSystem ./hosts/soused-baboon;
   };
 }

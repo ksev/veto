@@ -3,32 +3,24 @@
   lib,
   pkgs,
   ...
-}: {
+}: let extensions = with pkgs.gnomeExtensions; [
+  blur-my-shell
+  grand-theft-focus
+  no-overview
+  vitals
+  tiling-shell
+] ++ (if osConfig.networking.hostName == "tipsy-marmoset" then [
+  battery-health-charging
+] else []); in {
   config = lib.mkIf osConfig.services.xserver.desktopManager.gnome.enable {
-    home.packages = with pkgs; [
-      gnomeExtensions.blur-my-shell
-      gnomeExtensions.grand-theft-focus
-      gnomeExtensions.no-overview
-      gnomeExtensions.vitals
-      gnomeExtensions.battery-health-charging
-      gnomeExtensions.tiling-shell
-
-      gnome-tweaks
-    ];
+    home.packages = extensions;
 
     dconf = {
       enable = true;
       settings = {
         "org/gnome/shell" = {
           disable-user-extensions = false;
-          enabled-extensions = with pkgs.gnomeExtensions; [
-            blur-my-shell.extensionUuid
-            grand-theft-focus.extensionUuid
-            no-overview.extensionUuid
-            vitals.extensionUuid
-            battery-health-charging.extensionUuid
-            tiling-shell.extensionUuid
-          ];
+          enabled-extensions = map (e: e.extensionUuid) extensions;
         };
         "org/gnome/mutter" = {
           experimental-features = [
