@@ -94,6 +94,7 @@
 
   powerManagement.enable = true;
   powerManagement.cpuFreqGovernor = "powersave";
+  services.thermald.enable = true;
 
   services.upower.enable = true;
   programs.firefox.enable = true;
@@ -135,6 +136,12 @@
     pulse.enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
+
+    wireplumber.extraConfig."11-bluetooth-policy" = {
+        "wireplumber.settings" = {
+          "bluetooth.autoswitch-to-headset-profile" = false;
+        };
+    };
   };
 
   hardware.bluetooth.enable = true;
