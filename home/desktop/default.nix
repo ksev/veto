@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./gnome.nix
+    ./mangohud.nix
     #./niri
   ];
 
@@ -12,11 +13,6 @@
     k9s.enable = true;
     nushell.enable = true;
     niri.enable = true;
-  };
-
-  programs.mangohud = {
-    enable = true;
-    # enableSessionWide = true;
   };
 
   home.packages = with pkgs; [

@@ -53,6 +53,7 @@
   # programs.regreet.enable = true;
   services.xserver = {
     enable = true;
+    videoDrivers = [ "amdgpu" ];
     desktopManager.gnome.enable = true;
     displayManager.gdm = {
       enable = true;
