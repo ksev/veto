@@ -1,7 +1,9 @@
-{pkgs, ...}: let libs = (pkgs.runCommand "nu-libs" {} ''
-  mkdir $out;
-  cp ${./task.nu} $out/task.nu
-''); in{
+{pkgs, ...}: let
+  libs = pkgs.runCommand "nu-libs" {} ''
+    mkdir $out;
+    cp ${./task.nu} $out/task.nu
+  '';
+in {
   services.pueue.enable = true;
 
   programs.nushell = {

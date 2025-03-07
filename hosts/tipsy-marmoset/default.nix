@@ -93,35 +93,7 @@
   networking.wireguard.enable = true;
 
   powerManagement.enable = true;
-
-  /*
-  services.tlp = {
-    enable = true;
-    settings = {
-      RESTORE_THRESHOLDS_ON_BAT = 1;
-      START_CHARGE_THRESH_BAT0 = 75; # 40 and bellow it starts to charge
-      STOP_CHARGE_THRESH_BAT0 = 81; # 80 and above it stops charging    };
-    };
-  };
-  */
-
-  /*
-  services.auto-cpufreq = {
-    enable = true;
-    settings = {
-      battery = {
-        governor = "powersave";
-        turbo = "never";
-        enable_threshold = 20;
-        stop_threshold = 80;
-      };
-      charger = {
-        governor = "performance";
-        turbo = "auto";
-      };
-    };
-  };
-  */
+  powerManagement.cpuFreqGovernor = "powersave";
 
   services.upower.enable = true;
   programs.firefox.enable = true;

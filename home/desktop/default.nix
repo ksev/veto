@@ -23,6 +23,8 @@
     helvum
     networkmanagerapplet
 
+    bottles
+
     google-chrome
     postman
     slack

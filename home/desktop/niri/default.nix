@@ -13,7 +13,7 @@
   config = lib.mkIf osConfig.programs.niri.enable {
     programs.fuzzel.enable = true;
     services.mako.enable = true;
-    
+
     nixpkgs.overlays = [niri.overlays.niri];
 
     programs.niri.settings = {

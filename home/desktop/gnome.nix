@@ -3,15 +3,23 @@
   lib,
   pkgs,
   ...
-}: let extensions = with pkgs.gnomeExtensions; [
-  blur-my-shell
-  grand-theft-focus
-  no-overview
-  vitals
-  tiling-shell
-] ++ (if osConfig.networking.hostName == "tipsy-marmoset" then [
-  battery-health-charging
-] else []); in {
+}: let
+  extensions = with pkgs.gnomeExtensions;
+    [
+      blur-my-shell
+      grand-theft-focus
+      no-overview
+      vitals
+      tiling-shell
+    ]
+    ++ (
+      if osConfig.networking.hostName == "tipsy-marmoset"
+      then [
+        battery-health-charging
+      ]
+      else []
+    );
+in {
   config = lib.mkIf osConfig.services.xserver.desktopManager.gnome.enable {
     home.packages = extensions;
 

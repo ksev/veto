@@ -1,14 +1,16 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
-{ config, lib, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   stylix.enable = true;
   stylix.autoEnable = false;
@@ -53,7 +55,7 @@
   # programs.regreet.enable = true;
   services.xserver = {
     enable = true;
-    videoDrivers = [ "amdgpu" ];
+    videoDrivers = ["amdgpu"];
     desktopManager.gnome.enable = true;
     displayManager.gdm = {
       enable = true;
@@ -80,7 +82,7 @@
   networking.hostName = "soused-baboon"; # Define your hostname.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
-  # powerManagement.enable = true;
+  powerManagement.enable = true;
   programs.firefox.enable = true;
 
   programs._1password.enable = true;
@@ -92,6 +94,24 @@
   programs.localsend = {
     enable = true;
     openFirewall = true;
+  };
+
+  programs.gamemode = {
+    enable = true;
+    enableRenice = true;
+    settings = {
+      general = {
+        renice = 10;
+      };
+      custom = {
+        start = ''
+          ${pkgs.libnotify}/bin/notify-send "GameMode started"; localsearch daemon --miner 'org.freedesktop.Tracker3.Miner.Files' --pause GameMode
+        '';
+        end = ''
+          ${pkgs.libnotify}/bin/notify-send "GameMode ended"; localsearch daemon --miner 'org.freedesktop.Tracker3.Miner.Files' --resume 1
+        '';
+      };
+    };
   };
 
   programs.steam.enable = true;
@@ -135,9 +155,11 @@
   # services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.mutableUsers = false;
   users.users.kim = {
     isNormalUser = true;
-    extraGroups = ["wheel" "networkmanager"]; # Enable ‘sudo’ for the user.
+    hashedPassword = "$7$CU..../....Zgid.HbvcW6RfhCavldJY/$8isjd.460mNAnrrYIcLfTDEAEjeWRkruopvQteBXgz9";
+    extraGroups = ["wheel" "networkmanager" "gamemode"]; # Enable ‘sudo’ for the user.
   };
 
   # List packages installed in system profile. To search, run:

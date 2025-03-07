@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,7 +22,6 @@
     home-manager,
     stylix,
     niri,
-    chaotic,
     ...
   }: let
     system = "x86_64-linux";
@@ -49,12 +47,11 @@
         modules = [
           niri.nixosModules.niri
           stylix.nixosModules.stylix
-          chaotic.nixosModules.default
 
           home-manager.nixosModules.home-manager
 
           {
-            nixpkgs.overlays = [ linux-firmware-git ];
+            nixpkgs.overlays = [linux-firmware-git];
 
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
