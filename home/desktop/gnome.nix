@@ -21,7 +21,11 @@
     );
 in {
   config = lib.mkIf osConfig.services.xserver.desktopManager.gnome.enable {
-    home.packages = extensions;
+    home.packages =
+      extensions
+      ++ [
+        pkgs.gnome-sound-recorder
+      ];
 
     dconf = {
       enable = true;

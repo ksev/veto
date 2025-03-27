@@ -30,6 +30,9 @@
     slack
     filezilla
     dbeaver-bin
+    easyeffects
     zed-editor
+
+    orca-slicer
   ];
 }

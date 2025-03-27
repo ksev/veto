@@ -84,6 +84,7 @@
 
   powerManagement.enable = true;
   programs.firefox.enable = true;
+  programs.noisetorch.enable = true;
 
   programs._1password.enable = true;
   programs._1password-gui = {
@@ -149,6 +150,7 @@
 
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
+  hardware.xone.enable = true;
   services.fwupd.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -159,7 +161,7 @@
   users.users.kim = {
     isNormalUser = true;
     hashedPassword = "$7$CU..../....Zgid.HbvcW6RfhCavldJY/$8isjd.460mNAnrrYIcLfTDEAEjeWRkruopvQteBXgz9";
-    extraGroups = ["wheel" "networkmanager" "gamemode"]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel" "networkmanager" "gamemode" "dialout"]; # Enable ‘sudo’ for the user.
   };
 
   # List packages installed in system profile. To search, run:

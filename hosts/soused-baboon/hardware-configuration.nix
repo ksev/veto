@@ -14,7 +14,6 @@
 
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "thunderbolt" "usb_storage" "usbhid" "sd_mod" "sr_mod"];
   boot.initrd.kernelModules = [];
-  boot.kernelParams = ["usbhid.mousepoll=1"];
   boot.kernelModules = ["kvm-amd" "amdgpu"];
   boot.extraModulePackages = [];
 
@@ -32,6 +31,7 @@
   swapDevices = [];
   zramSwap.enable = true;
 
+  chaotic.mesa-git.enable = true;
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
