@@ -12,6 +12,8 @@
     ./network.nix
   ];
 
+  environment.systemPackages = with pkgs; [btop];
+
   boot.loader = {
     systemd-boot.enable = true;
     efi = {
