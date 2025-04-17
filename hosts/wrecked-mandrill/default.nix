@@ -8,6 +8,7 @@
     ./hardware-configuration.nix
     ./partition.nix
     ./storage
+    ./vm
     ./network.nix
   ];
 
@@ -41,6 +42,7 @@
   };
 
   users.users.kim = {
+    uid = 1000;
     isNormalUser = true;
     home = "/home/kim";
     extraGroups = ["wheel" "sudoers"];
