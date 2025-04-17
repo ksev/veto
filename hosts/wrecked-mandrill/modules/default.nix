@@ -1,0 +1,5 @@
+{
+  imports = [
+    ./servicevm.nix
+  ];
+}

@@ -7,9 +7,11 @@
   imports = [
     ./hardware-configuration.nix
     ./partition.nix
+
+    ./modules
     ./storage
-    ./vm
     ./network.nix
+    ./vm
   ];
 
   environment.systemPackages = with pkgs; [btop];

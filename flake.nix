@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     microvm = {
       url = "github:astro/microvm.nix";
@@ -36,7 +35,6 @@
     home-manager,
     stylix,
     niri,
-    chaotic,
     disko,
     microvm,
     ...
@@ -53,7 +51,6 @@
         modules = [
           niri.nixosModules.niri
           stylix.nixosModules.stylix
-          chaotic.nixosModules.default
 
           home-manager.nixosModules.home-manager
 

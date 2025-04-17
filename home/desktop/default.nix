@@ -2,7 +2,7 @@
   imports = [
     ./gnome.nix
     ./mangohud.nix
-    #./niri
+    ./clapper.nix
   ];
 
   stylix.targets = {

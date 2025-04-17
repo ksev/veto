@@ -1,10 +1,9 @@
-{
-  pkgs,
-  commonVMConfig,
-  ...
-}: {
-  microvm.vms.dns = {
-    config = commonVMConfig "dns" "ce:b3:a5:0c:94:f8" 50 {
+{pkgs, ...}: {
+  servicevm.dns = {
+    ip = "10.123.0.50";
+    mac = "ce:b3:a5:0c:94:f8";
+
+    config = {
       environment.systemPackages = [
         pkgs.dig
       ];
@@ -16,7 +15,7 @@
         allowedUDPPorts = [53];
       };
 
-      systemd.services.blocky.after = [ "unbound.service" ];
+      systemd.services.blocky.after = ["unbound.service"];
 
       services.blocky = {
         enable = true;
@@ -30,19 +29,17 @@
           customDNS = {
             customTTL = "1h";
             filterUnmappedTypes = true;
-            mapping."storage.kotee.co" = "10.123.0.5,2001:9b1:4fe:4402:9837:2dff:fe73:95ef";
+            mapping = {
+              "storage.kotee.co" = "10.123.0.5,2001:9b1:4fe:4402:9837:2dff:fe73:95ef";
+              "prowlarr.kotee.co" = "10.123.0.10,2001:9b1:4fe:4402:7842:e6ff:feb5:e450";
+              "radarr.kotee.co" = "10.123.0.10,2001:9b1:4fe:4402:7842:e6ff:feb5:e450";
+              "sonarr.kotee.co" = "10.123.0.10,2001:9b1:4fe:4402:7842:e6ff:feb5:e450";
+              "rlib.kotee.co" = "10.123.0.15,2001:9b1:4fe:4402:1044:37ff:feea:c61f";
+            };
           };
           blocking = {
-            denylists.ads = map (pkg: "https://blocklistproject.github.io/Lists/${pkg}.txt") [
-              "fraud"
-              "phishing"
-              "abuse"
-              "ads"
-              "malware"
-              "ransomware"
-              "scam"
-              "tracking"
-              "smart-tv"
+            denylists.ads = [
+              "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
             ];
             clientGroupsBlock.default = ["ads"];
           };

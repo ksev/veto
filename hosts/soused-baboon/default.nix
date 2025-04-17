@@ -63,6 +63,27 @@
     };
   };
 
+  environment.gnome.excludePackages = [
+    pkgs.baobab
+    pkgs.epiphany
+    pkgs.geary
+    pkgs.gnome-text-editor
+    pkgs.gnome-calendar
+    pkgs.gnome-characters
+    pkgs.gnome-clocks
+    pkgs.gnome-contacts
+    pkgs.gnome-font-viewer
+    pkgs.gnome-logs
+    pkgs.gnome-maps
+    pkgs.gnome-music
+    pkgs.gnome-weather
+    pkgs.gnome-connections
+    pkgs.simple-scan
+    pkgs.snapshot
+    pkgs.totem
+    pkgs.yelp
+  ];
+
   nix = {
     gc.automatic = true;
     settings = {
