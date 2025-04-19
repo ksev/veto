@@ -84,6 +84,19 @@
     pkgs.yelp
   ];
 
+  environment.sessionVariables.GST_PLUGIN_SYSTEM_PATH_1_0 = with pkgs; lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" [
+    # Plugins to reuse ffmpeg to play almost every video format
+    gst_all_1.gst-libav
+    # Support the Video Audio (Hardware) Acceleration API
+    gst_all_1.gstreamer
+    # Common plugins like "filesrc" to combine within e.g. gst-launch
+    gst_all_1.gst-plugins-base
+    # Specialized plugins separated by quality
+    gst_all_1.gst-plugins-good
+    gst_all_1.gst-plugins-bad
+    gst_all_1.gst-plugins-ugly
+  ];
+
   nix = {
     gc.automatic = true;
     settings = {
@@ -105,7 +118,6 @@
 
   powerManagement.enable = true;
   programs.firefox.enable = true;
-  programs.noisetorch.enable = true;
 
   programs._1password.enable = true;
   programs._1password-gui = {
@@ -136,7 +148,12 @@
     };
   };
 
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    extraCompatPackages = with pkgs; [
+      proton-ge-bin
+    ];
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Stockholm";
